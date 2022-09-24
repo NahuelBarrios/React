@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clase 1</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <h1>Women in Teach</h1>
+    <div id="app"></div>
+    <script type="text/babel">
+        const $app = document.getElementById("app");
+        const useState = React.useState;
+
+        const Avatar = params => {
+            const [enabled, setEnabled] = useState(true);
+            const src = `https://randomuser.me/api/portraits/women/${params.id}.jpg`;
+            //return h("img",{src});
+           const className = enabled ? '' : 'disabled';
+           
+            return (
+                <picture>
+                <img onClick={() => setEnabled(!enabled)} className={className} src={src}/>
+                <strong>{params.name}</strong>
+                </picture>
+                );
+        
+        };
+        ReactDOM.render(
+            <div>
+                <Avatar id={10} name="Ana"/>
+                <Avatar id ={11} name="Lisa"/>
+            </div>, $app
+        );
+    </script>
+    
+</body>
+</html>
