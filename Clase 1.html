@@ -11,6 +11,30 @@
 </head>
 <body>
     <h1>Women in Teach</h1>
+    <style>
+        picture{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 100px;
+        }
+
+        picture.is-small{
+            width: 50px;
+        }
+
+        picture.is-large{
+            width: 250px;
+        }
+        img{
+            box-shadow: 0 0 15 #999;
+            border-radius: 50%;
+            width: 100%;
+        }
+        img.disabled{
+            opacity: 0.3;
+        }
+    </style>
     <div id="app"></div>
     <script type="text/babel">
         const $app = document.getElementById("app");
@@ -19,12 +43,19 @@
         const Avatar = params => {
             const [enabled, setEnabled] = useState(true);
             const src = `https://randomuser.me/api/portraits/women/${params.id}.jpg`;
-            //return h("img",{src});
-           const className = enabled ? '' : 'disabled';
+
+            let pictureClassName = "";
+            if(params.size === "small"){
+                pictureClassName = 'is-small';
+            }else if(params.size === "large"){
+                pictureClassName = 'is-large';
+            }
+            
+           const imgClassName = enabled ? '' : 'disabled';
            
             return (
-                <picture>
-                <img onClick={() => setEnabled(!enabled)} className={className} src={src}/>
+                <picture className={pictureClassName}>
+                <img onClick={() => setEnabled(!enabled)} className={imgClassName} src={src}/>
                 <strong>{params.name}</strong>
                 </picture>
                 );
@@ -32,8 +63,9 @@
         };
         ReactDOM.render(
             <div>
-                <Avatar id={10} name="Ana"/>
+                <Avatar id={10} name="Ana" size="small"/>
                 <Avatar id ={11} name="Lisa"/>
+                <Avatar id ={22} name="Marina" size="large"/>
             </div>, $app
         );
     </script>
