@@ -2,34 +2,27 @@
 import logo from './logo.svg';
 import React, {useEffect,useState} from 'react';
 import './App.css';
+import getGifs from './services/getGifs';
+import Gif from './components/Gif'
 
-const GIFS = [
-  "https://media.giphy.com/media/rDMGBIqjAJIys/giphy.gif",
-  "https://media.giphy.com/media/BdMRkwomqVsLm/giphy.gif"
-]
+export default function App() {
 
-const DIFERENT_GIFS = [
-  "https://media.giphy.com/media/N6funLtVsHW0g/giphy.gif"
-]
-function App() {
-
-  const [gifs, setGifs] = useState(GIFS);
+  const [gifs, setGifs] = useState([]);
 
   useEffect(function (){
-    console.log("Actualizadno Los Gift");
-    setGifs(DIFERENT_GIFS);
+    getGifs({keyword : 'programming'}).then(gifs => setGifs(gifs));
   },[])
 
   return (
     <div className="App">
-      <section className="App-content">
+       <section className="App-content">
       {
-        gifs.map(singleGif => <img src ={singleGif}/>)
-      
+        gifs.map(singleGif => 
+        <Gif key={singleGif.id} title={singleGif.title} id={singleGif.id} url={singleGif.url}/>
+        )
       }
       </section>
     </div>
   );
 }
 
-export default App;
