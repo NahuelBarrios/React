@@ -1,11 +1,12 @@
 import React from 'react'
+import './Gif.css'
 
-export default function GIF({title, id, url}){
+export default function GIF({data}){
     return (
-        <div>
-            <h4>{title}</h4>
-            <small>{id}</small>
-            <img alt={title} src={url}/>
-        </div>
+        <a href={`#${data.id}`} className='Gif'>
+            <h4>{data.title}</h4>
+            <small>{data.id}</small>
+            <img alt={data.title} src={data.url}/>
+        </a>
     )
 }
