@@ -1,22 +1,21 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 import Gif from './Gif'
-import getGifs from '../services/getGifs'
 
-
-export default function ListOfGifs({params}){  
-  const {keyword} = params;
-  const [gifs, setGifs] = useState([]);
-
-  useEffect(function (){
-    getGifs({keyword}).then(gifs => setGifs(gifs));
-  },[keyword])
-
- return <div>
+export default function ListOfGifs({gifs}){  
+ return <div className='ListOfGifs'>
   {
-  gifs.map(singleGif => 
-        //<Gif key={singleGif.id} title={singleGif.title} id={singleGif.id} url={singleGif.url}/> 
-        <Gif key={singleGif.id} data={singleGif}/> //Mandar los ... cada vez que quiera romper la relacion uwu asi poder modificarlo (Operador spread)
-      )
+  gifs.map(({id,title,url}) =>
+  <Gif id = {id}
+  key={id}
+  title={title}
+  url={url}
+  />  
+  )
   }
  </div> 
 }
+
+//(singleGif => 
+        //<Gif key={singleGif.id} title={singleGif.title} id={singleGif.id} url={singleGif.url}/> 
+       // <Gif key={singleGif.id} data={singleGif}/> //Mandar los ... cada vez que quiera romper la relacion uwu asi poder modificarlo (Operador spread)
+      
